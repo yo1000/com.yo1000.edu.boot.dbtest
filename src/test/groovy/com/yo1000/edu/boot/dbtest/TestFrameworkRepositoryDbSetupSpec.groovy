@@ -26,6 +26,7 @@ class TestFrameworkRepositoryDbSetupSpec extends Specification {
                 .columns('GROUP_ID'         , 'ARTIFACT_ID' , 'DESC')
                 .values('com.ninja-squad'   , 'DbSetup'     , '小さいデータ向き。コードとデータを一緒に管理したい場合にオススメ。')
                 .values('org.dbunit'        , 'dbunit'      , '大きいデータ向き。大量データの集計などをテストしたい場合にオススメ。')
+                .values('Null Example'      , 'Null Example', null)
                 .build()
 
         new DbSetup(destination,
@@ -45,6 +46,7 @@ class TestFrameworkRepositoryDbSetupSpec extends Specification {
             println 'groupId: ' + it.get('groupId')
             println 'artifactId: ' + it.get('artifactId')
             println 'desc: ' + it.get('desc')
+            println 'desc is null?: ' + (it.get('desc') == null)
         }
 
         assert items.size() > 0

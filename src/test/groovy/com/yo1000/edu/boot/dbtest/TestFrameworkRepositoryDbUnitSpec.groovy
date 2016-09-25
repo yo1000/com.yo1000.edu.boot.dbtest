@@ -40,6 +40,7 @@ class TestFrameworkRepositoryDbUnitSpec extends Specification {
             println 'groupId: ' + it.get('groupId')
             println 'artifactId: ' + it.get('artifactId')
             println 'desc: ' + it.get('desc')
+            println 'desc is null?: ' + (it.get('desc') == null)
         }
 
         assert items.size() > 0
