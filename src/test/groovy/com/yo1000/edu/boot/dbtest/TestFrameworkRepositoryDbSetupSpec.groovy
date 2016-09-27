@@ -3,6 +3,7 @@ package com.yo1000.edu.boot.dbtest
 import com.ninja_squad.dbsetup.DbSetup
 import com.ninja_squad.dbsetup.Operations
 import com.ninja_squad.dbsetup.destination.DataSourceDestination
+import com.yo1000.dbspock.dbsetup.DbspockOperations
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import spock.lang.Specification
@@ -22,12 +23,14 @@ class TestFrameworkRepositoryDbSetupSpec extends Specification {
     def setup() {
         def destination = new DataSourceDestination(dataSource)
 
-        def insertItems = Operations.insertInto('TEST_FRAMEWORK')
-                .columns('GROUP_ID'         , 'ARTIFACT_ID' , 'DESC')
-                .values('com.ninja-squad'   , 'DbSetup'     , '小さいデータ向き。コードとデータを一緒に管理したい場合にオススメ。')
-                .values('org.dbunit'        , 'dbunit'      , '大きいデータ向き。大量データの集計などをテストしたい場合にオススメ。')
-                .values('Null Example'      , 'Null Example', null)
-                .build()
+        def insertItems = DbspockOperations.insertInto {
+            TEST_FRAMEWORK {
+                col 'GROUP_ID'         | 'ARTIFACT_ID' | 'DESC'
+                row 'com.ninja-squad'  | 'DbSetup'     | '小さいデータ向き。コードとデータを一緒に管理したい場合にオススメ。'
+                row 'org.dbunit'       | 'dbunit'      | '大きいデータ向き。大量データの集計などをテストしたい場合にオススメ。'
+                row 'Null Example'     | 'Null Example'| null
+            }
+        }
 
         new DbSetup(destination,
                 Operations.sequenceOf(

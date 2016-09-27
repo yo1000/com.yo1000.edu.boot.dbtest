@@ -1,12 +1,11 @@
 package com.yo1000.edu.boot.dbtest
 
+import com.yo1000.dbspock.dbunit.DbspockLoaders
 import com.yo1000.edu.boot.dbtest.Application.TestFrameworkRepository
 import org.dbunit.DataSourceDatabaseTester
 import org.dbunit.operation.DatabaseOperation
-import org.dbunit.util.fileloader.CsvDataFileLoader
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.util.ResourceUtils
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -25,8 +24,14 @@ class TestFrameworkRepositoryDbUnitSpec extends Specification {
         def databaseTester = new DataSourceDatabaseTester(dataSource)
         databaseTester.setUpOperation = DatabaseOperation.CLEAN_INSERT
 
-        def loader = new CsvDataFileLoader()
-        databaseTester.dataSet = loader.loadDataSet(ResourceUtils.getURL("classpath:dbunit/"))   // Requires tail slash
+        databaseTester.dataSet = DbspockLoaders.loadDataSet {
+            TEST_FRAMEWORK {
+                col 'GROUP_ID'         | 'ARTIFACT_ID' | 'DESC'
+                row 'com.ninja-squad'  | 'DbSetup'     | '小さいデータ向き。コードとデータを一緒に管理したい場合にオススメ。'
+                row 'org.dbunit'       | 'dbunit'      | '大きいデータ向き。大量データの集計などをテストしたい場合にオススメ。'
+                row 'Null Example'     | 'Null Example'| null
+            }
+        }
 
         databaseTester.onSetup()
     }

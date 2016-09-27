@@ -77,6 +77,25 @@
 			<version>2.5.3</version>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>com.yo1000</groupId>
+			<artifactId>dbspock-core</artifactId>
+			<version>1.1.0.RELEASE</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.yo1000</groupId>
+			<artifactId>dbspock-dbsetup</artifactId>
+			<version>1.1.0.RELEASE</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.yo1000</groupId>
+			<artifactId>dbspock-dbunit</artifactId>
+			<version>1.1.0.RELEASE</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -128,4 +147,12 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<repositories>
+		<repository>
+			<id>com.yo1000</id>
+			<name>yo1000 maven repository</name>
+			<url>http://yo1000.github.io/maven/</url>
+		</repository>
+	</repositories>
 </project>
