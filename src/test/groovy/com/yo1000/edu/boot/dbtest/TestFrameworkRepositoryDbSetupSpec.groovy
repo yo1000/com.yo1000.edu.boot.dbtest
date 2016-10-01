@@ -25,10 +25,10 @@ class TestFrameworkRepositoryDbSetupSpec extends Specification {
 
         def insertItems = DbspockOperations.insertInto {
             TEST_FRAMEWORK {
-                col 'GROUP_ID'         | 'ARTIFACT_ID' | 'DESC'
-                row 'com.ninja-squad'  | 'DbSetup'     | '小さいデータ向き。コードとデータを一緒に管理したい場合にオススメ。'
-                row 'org.dbunit'       | 'dbunit'      | '大きいデータ向き。大量データの集計などをテストしたい場合にオススメ。'
-                row 'Null Example'     | 'Null Example'| null
+                GROUP_ID          | ARTIFACT_ID    | DESC
+                'com.ninja-squad' | 'DbSetup'      | '小さいデータ向き。コードとデータを一緒に管理したい場合にオススメ。'
+                'org.dbunit'      | 'dbunit'       | '大きいデータ向き。大量データの集計などをテストしたい場合にオススメ。'
+                'Null Example'    | 'Null Example' | null
             }
         }
 
